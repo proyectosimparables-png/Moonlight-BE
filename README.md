@@ -4,6 +4,16 @@ Este documento organiza el desarrollo de la nueva web de **Moonlight**, combinan
 Duración estimada: **5–6 meses** (part-time, 2 personas, juniors).  
 
 ---
+## 🗓 Semana 0 – Setup inicial
+
+- Crear cuentas: Gmail, GitHub, Supabase, Vercel.  
+- Crear repositorios backend y frontend.  
+- Configurar entornos de desarrollo (Node, NestJS/Express, Next.js, Tailwind).  
+- Configurar `.env` en BE y FE.  
+- APIs de prueba en Nest.js (`GET /ping`).  
+- Diseño inicial generado con IA + validación del equipo.  
+
+---
 
 ## 🗓 Fase 1 – Mes 1: Setup y MVP básico
 
