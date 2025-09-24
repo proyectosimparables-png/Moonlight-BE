@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String       @id @default(uuid())
+  email       String       @unique
+  name        String?
+  password    String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  // Relaciones
+  comentarios Comentario[]
+  ordenes     Orden[]
+  favoritos   Favorito[]
+  historial   Historial[]
+}
+
+model Producto {
+  id          String       @id @default(uuid())
+  nombre      String
+  descripcion String?
+  precio      Float
+  stock       Int
+  imagenUrl   String?
+  createdAt   DateTime     @default(now())
+
+  // Relaciones
+  comentarios Comentario[]
+  favoritos   Favorito[]
+  ordenes     Orden[]
+  historial   Historial[]
+}
+
+model Comentario {
+  id          String    @id @default(uuid())
+  contenido   String
+  createdAt   DateTime  @default(now())
+
+  // Relaciones
+  userId      String
+  productoId  String
+  user        User      @relation(fields: [userId], references: [id])
+  producto    Producto  @relation(fields: [productoId], references: [id])
+}
+
+model Orden {
+  id          String    @id @default(uuid())
+  userId      String
+  productoId  String
+  cantidad    Int
+  total       Float
+  estado      String    // Ej: "pendiente", "enviado", "entregado"
+  createdAt   DateTime  @default(now())
+
+  user        User      @relation(fields: [userId], references: [id])
+  producto    Producto  @relation(fields: [productoId], references: [id])
+}
+
+model Historial {
+  id          String    @id @default(uuid())
+  userId      String
+  productoId  String
+  accion      String    // Ej: "visto", "comprado", etc.
+  fecha       DateTime  @default(now())
+
+  user        User      @relation(fields: [userId], references: [id])
+  producto    Producto  @relation(fields: [productoId], references: [id])
+}
+
+model Favorito {
+  id          String    @id @default(uuid())
+  userId      String
+  productoId  String
+  createdAt   DateTime  @default(now())
+
+  user        User      @relation(fields: [userId], references: [id])
+  producto    Producto  @relation(fields: [productoId], references: [id])
+}
