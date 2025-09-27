@@ -3,9 +3,11 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
+
 
 model User {
   id          String       @id @default(uuid())
@@ -36,7 +38,38 @@ model Producto {
   favoritos   Favorito[]
   ordenes     Orden[]
   historial   Historial[]
+
+   // Nuevas relaciones
+  seccion     Seccion?     @relation(fields: [seccionId], references: [id])
+  seccionId   String?
+
+  tipoPrenda  TipoPrenda   @relation(fields: [tipoPrendaId], references: [id])
+  tipoPrendaId String
+
+  categoria   Categoria?   @relation(fields: [categoriaId], references: [id])
+  categoriaId String?
 }
+model Seccion {
+  id        String      @id @default(uuid())
+  nombre    String
+  productos Producto[]
+}
+
+model TipoPrenda {
+  id         String      @id @default(uuid())
+  nombre     String
+  categorias Categoria[]
+  productos  Producto[]
+}
+
+model Categoria {
+  id           String      @id @default(uuid())
+  nombre       String
+  tipoPrenda   TipoPrenda  @relation(fields: [tipoPrendaId], references: [id])
+  tipoPrendaId String
+  productos    Producto[]
+}
+
 
 model Comentario {
   id          String    @id @default(uuid())
