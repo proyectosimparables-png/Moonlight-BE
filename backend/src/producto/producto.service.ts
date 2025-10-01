@@ -8,7 +8,9 @@ export class ProductoService {
 
   // Crear producto
   async create(data: CreateProductoDto) {
-    return this.prisma.producto.create({ data });
+    // return this.prisma.producto.create({ data });
+    // Mientras tanto podés devolver algo temporal para evitar errores:
+    return { mensaje: 'Funcionalidad comentada temporalmente' };
   }
 
   // Listar todos los productos
