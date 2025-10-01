@@ -32,6 +32,7 @@ model Producto {
   stock       Int
   imagenUrl   String?
   createdAt   DateTime     @default(now())
+  published   Boolean      @default(false)
 
   // Relaciones
   comentarios Comentario[]
@@ -39,36 +40,59 @@ model Producto {
   ordenes     Orden[]
   historial   Historial[]
 
-   // Nuevas relaciones
-  seccion     Seccion?     @relation(fields: [seccionId], references: [id])
-  seccionId   String?
+  categoria   Categoria    @relation(fields: [categoriaId], references: [id])
+  categoriaId String
 
-  tipoPrenda  TipoPrenda   @relation(fields: [tipoPrendaId], references: [id])
-  tipoPrendaId String
+  tipoPrenda   TipoPrenda? @relation(fields: [tipoPrendaId], references: [id])
+  tipoPrendaId String?
 
-  categoria   Categoria?   @relation(fields: [categoriaId], references: [id])
-  categoriaId String?
+   seccion     Seccion?     @relation(fields: [seccionId], references: [id])
+  seccionId   String?     
+
 }
-model Seccion {
-  id        String      @id @default(uuid())
-  nombre    String
-  productos Producto[]
-}
+
 
 model TipoPrenda {
   id         String      @id @default(uuid())
-  nombre     String
+  nombre     String      @unique
   categorias Categoria[]
   productos  Producto[]
 }
 
+
+
+
 model Categoria {
-  id           String      @id @default(uuid())
-  nombre       String
-  tipoPrenda   TipoPrenda  @relation(fields: [tipoPrendaId], references: [id])
-  tipoPrendaId String
-  productos    Producto[]
+  id            String       @id @default(uuid())
+  nombre        String       @unique
+  productos     Producto[]
+
+  // Jerarquía de categorías
+  padre         Categoria?   @relation("CategoriaPadre", fields: [padreId], references: [id])
+  padreId       String?
+  subcategorias Categoria[]  @relation("CategoriaPadre")
+
+  // Opcional: si querés agrupar por tipo general
+  seccion       Seccion?     @relation(fields: [seccionId], references: [id])
+  seccionId     String?
+
+  tipoPrenda   TipoPrenda? @relation(fields: [tipoPrendaId], references: [id])
+  tipoPrendaId String?
+
 }
+
+
+
+model Seccion {
+  id          String       @id @default(uuid())
+  nombre      String       @unique
+  categorias  Categoria[]
+  productos   Producto[]
+
+}
+
+
+
 
 
 model Comentario {
