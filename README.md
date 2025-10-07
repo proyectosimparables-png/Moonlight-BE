@@ -1,13 +1,13 @@
 # 🌙 Moonlight – Roadmap Full Stack
 
 Este documento organiza el desarrollo de la nueva web de **Moonlight**, combinando un ecommerce completo con features creativas e interactivas.  
-Duración estimada: **5–6 meses** (part-time, 2 personas, juniors).  
+Duración estimada: **5–6 meses** (part-time, 2 personas).  
 
 ---
 ## 🗓 Semana 0 – Setup inicial
 
 - Crear cuentas: Gmail, GitHub, Supabase, Vercel.  
-- Crear repositorios backend y frontend.  
+- Crear repositorio   
 - Configurar entornos de desarrollo (Node, NestJS/Express, Next.js, Tailwind).  
 - Configurar `.env` en BE y FE.  
 - APIs de prueba en Nest.js (`GET /ping`).  
@@ -18,17 +18,19 @@ Duración estimada: **5–6 meses** (part-time, 2 personas, juniors).
 ## 🗓 Fase 1 – Mes 1: Setup y MVP básico
 
 ### Backend
-- Configuración proyecto Node/NestJS o Express + DB (Postgres o Mongo).  
-- Modelos: Users, Products, Orders, ARMY content, Quiz results.  
-- Endpoints: login/register, productos, carrito, pedidos, descarga ARMY.  
+- Autenticación de terceros Supabase.
+- Modelo en Prisma: Users, Products, Orders, ARMY content, Quiz results.  
+- Endpoints: login/register, productos, carrito, pedidos, descarga ARMY.
+- Panel Admin  
 
 ### Frontend
-- Estructura Next.js / React.  
+- Creacion de componentes principales 
 - Integración paleta de colores, tipografías e iconos de marca.  
 - Hero banner con CTA.  
 - Catálogo con cards y videos cortos.  
 - Carrito funcional simple.  
 - Formulario de contacto + suscripción básica.  
+- Panel Admin  
 
 ### QA
 - Testear endpoints básicos y frontend conectado.  
@@ -38,7 +40,7 @@ Duración estimada: **5–6 meses** (part-time, 2 personas, juniors).
 ## 🗓 Fase 2 – Mes 2: Funcionalidades básicas
 
 ### Backend
-- Checkout con integración de pasarela de pago sandbox.  
+- Checkout con integración de pasarela de pago MP.  
 - Guardar compras y generar flags para ARMY.  
 - APIs para quiz y ruleta simple.  
 
