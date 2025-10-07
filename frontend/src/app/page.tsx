@@ -2,6 +2,7 @@
 import React from 'react'
 import { Login } from '../components/Login'
 import TestProtected from '../components/TestProtected'
+import NavbarAdmin from '@/components/admin/NavbarAdmin'
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Login />
       <hr />
       <TestProtected />
+      <NavbarAdmin />
     </div>
   )
 
